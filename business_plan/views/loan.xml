@@ -1,0 +1,40 @@
+<odoo>
+    <data>
+        <record id="forecast_loan_view_list" model="ir.ui.view">
+            <field name="name">forecast.loan.view.list</field>
+            <field name="model">forecast.loan</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name='name'/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_forecast_loan_form" model="ir.ui.view">
+            <field name="name">forecast.loan.form</field>
+            <field name="model">forecast.loan</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="name"/>
+                        <field name="yearly_rate" widget="percentage"/>
+                        <field name="payment_count"/>
+                        <field name="loan_amount"/>
+                        <field name="first_payment_date"/>
+                        <field name="loan_line_ids">
+                            <list editable="bottom" multi_edit="1" open_form_view="True">
+                                <field name="id"/>
+                                <field name="loan_id"/>
+                                <field name="monthly_payment_rel"/>
+                                <field name="outstanding_balance"/>
+                                <field name="interest_portion"/>
+                                <field name="capital_portion"/>
+                                <field name="new_outstanding_balance"/>
+                            </list>
+                        </field>
+                    </group>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

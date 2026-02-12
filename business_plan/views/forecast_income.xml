@@ -1,0 +1,42 @@
+<odoo>
+    <data>
+        <record id="forecast_income_view_list" model="ir.ui.view">
+            <field name="name">forecast.income.view.list</field>
+            <field name="model">forecast.income</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="name"/>
+                    <field name="type"/>
+                    <field name="start_date"/>
+                    <field name="is_recurring"/>
+                    <field name="discount"/>
+                    <field name="end_date"/>
+                    <field name="payment_terms_id"/>
+                    <field name="account_id"/>
+                </list>
+            </field>
+        </record>
+        <record id="view_forecast_income_form" model="ir.ui.view">
+            <field name="name">forecast.income.form</field>
+            <field name="model">forecast.income</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="name"/>
+                        <field name="start_date"/>
+                        <field name="is_recurring"/>
+                        <field name="end_date"/>
+                        <field name="qty"/>
+                        <field name="unit_price"/>
+                        <field name="amount_no_vat"/>
+                        <field name="amount_with_vat"/>
+                        <field name="discount"/>
+                        <field name="payment_terms_id"/>
+                        <field name="cashflow_period_ids"/>
+                        <field name="account_id"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

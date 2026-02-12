@@ -1,0 +1,47 @@
+<odoo>
+    <data>
+        <!-- explicit list view definition -->
+
+        <!-- actions opening views on models -->
+        <!--
+            <record model="ir.actions.act_window" id="plan_financier.action_window">
+              <field name="name">plan_financier window</field>
+              <field name="res_model">plan_financier.plan_financier</field>
+              <field name="view_mode">list,form</field>
+            </record>
+        -->
+
+        <!-- server action to the one above -->
+        <!--
+            <record model="ir.actions.server" id="plan_financier.action_server">
+              <field name="name">plan_financier server</field>
+              <field name="model_id" ref="model_plan_financier_plan_financier"/>
+              <field name="state">code</field>
+              <field name="code">
+                action = {
+                  "type": "ir.actions.act_window",
+                  "view_mode": "list,form",
+                  "res_model": model._name,
+                }
+              </field>
+            </record>
+        -->
+
+        <!-- Top menu item -->
+        <!--
+            <menuitem name="plan_financier" id="plan_financier.menu_root"/>
+        -->
+        <!-- menu categories -->
+        <!--
+            <menuitem name="Menu 1" id="plan_financier.menu_1" parent="plan_financier.menu_root"/>
+            <menuitem name="Menu 2" id="plan_financier.menu_2" parent="plan_financier.menu_root"/>
+        -->
+        <!-- actions -->
+        <!--
+            <menuitem name="List" id="plan_financier.menu_1_list" parent="plan_financier.menu_1"
+                      action="plan_financier.action_window"/>
+            <menuitem name="Server to list" id="plan_financier" parent="plan_financier.menu_2"
+                      action="plan_financier.action_server"/>
+        -->
+    </data>
+</odoo>

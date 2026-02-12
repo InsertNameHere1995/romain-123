@@ -1,0 +1,44 @@
+<odoo>
+    <data>
+
+        <record id="view_period_form" model="ir.ui.view">
+            <field name="name">period.form</field>
+            <field name="model">period</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="start_date"/>
+                        <field name="end_date"/>
+                        <field name="invoiced_income_ids"/>
+                        <field name="cashflow_income_ids"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_period" model="ir.actions.act_window">
+            <field name="name">Périodes projet</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">period</field>
+            <field name="view_mode">list,form,graph,pivot</field>
+        </record>
+        <menuitem id="menu_period_root"
+                  name="Périodes"
+                  action="action_period"
+                  sequence="10"/>
+
+        <record id="period_view_list" model="ir.ui.view">
+            <field name="name">period.view.list</field>
+            <field name="model">period</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name='start_date'/>
+                    <field name='end_date'/>
+                    <field name="invoiced_income_amount_no_vat"/>
+                    <field name='business_project_id'/>
+                    <field name="cashflow_income_ids"/>
+                </list>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,7 @@
+<odoo noupdate="1">
+    <record id="default_payment_term" model="payment.terms">
+        <field name="name">Romain's payment terms</field>
+        <field name="is_end_of_month">False</field>
+        <field name="days">30</field>
+    </record>
+</odoo>
