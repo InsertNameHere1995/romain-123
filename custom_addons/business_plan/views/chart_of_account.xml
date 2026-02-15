@@ -1,0 +1,41 @@
+<odoo>
+    <data>
+        <record id="view_chart_of_account_form" model="ir.ui.view">
+            <field name="name">chart.of.account.form</field>
+            <field name="model">chart.of.account</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="name"/>
+                        <field name="code"/>
+                        <field name="business_project_id"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_chart_of_account" model="ir.actions.act_window">
+            <field name="name">Chart of Account</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">chart.of.account</field>
+            <field name="view_mode">list,form</field>
+        </record>
+        <menuitem id="menu_chart_of_account_root"
+                  name="COA"
+                  action="action_chart_of_account"
+                  sequence="10"/>
+
+        <record id="chart_of_account_view_list" model="ir.ui.view">
+            <field name="name">chart.of.account.view.list</field>
+            <field name="model">chart.of.account</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="id"/>
+                    <field name='code'/>
+                    <field name="name"/>
+                    <field name="business_project_id"/>
+                </list>
+            </field>
+        </record>
+    </data>
+</odoo>
