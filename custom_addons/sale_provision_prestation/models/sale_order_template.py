@@ -2,7 +2,7 @@ from odoo import models, fields, api
 from odoo.exceptions import ValidationError
 
 
-class SaleOrder(models.Model):
+class SaleOrderTemplate(models.Model):
     _inherit = "sale.order.template"
 
     is_prestation = fields.Boolean(string="Est une prestation",default= False)

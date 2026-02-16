@@ -1,0 +1,15 @@
+<odoo>
+    <record id="sale_order_form_view_inherit" model="ir.ui.view">
+        <field name="name">sale.order.form.roag.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+        <!--  Ajouter le champ après le champ 'name'  -->
+        <xpath expr="/form//field[@name='sale_order_template_id']" position="after">
+            <field name="is_provision"/>
+            <field name="is_prestation"/>
+            <field name="so_prestation" options="{'no_create': False, 'no_open': False}"/>
+        </xpath>
+        </field>
+    </record>
+</odoo>
