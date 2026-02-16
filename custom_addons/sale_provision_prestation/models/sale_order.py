@@ -4,14 +4,24 @@ from odoo import models, fields, api
 class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
+
     so_prestation = fields.Many2one(
         'sale.order',  # comodel_name: Le nom technique du modèle cible (ici, le modèle des contacts)
         string='Commande de Prestation',  # string: Le libellé affiché dans l'interface utilisateur
         ondelete='restrict',  # ondelete: Définit le comportement en cas de suppression de l'enregistrement lié
         domain=[('is_prestation', '=', True)]
         )
-    is_prestation= fields.Boolean(string="Est Prestation",compute="_compute_is_prestation")
-    is_provision = fields.Boolean(string="Est Provision", compute="_compute_is_provision")
+    is_prestation= fields.Boolean(string="Est Prestation",compute="_compute_is_prestation", store=True)
+    is_provision = fields.Boolean(string="Est Provision", compute="_compute_is_provision", store=True)
+    provision_invoices = fields.Many2many(
+        'account.move',  # comodel_name: Le nom technique du modèle cible
+        'provision_invoices_rel', # relation: Nom de la table de jonction (optionnel, Odoo en génère un si non spécifié)
+        'order_id',          # column1: Nom de la colonne dans la table de jonction qui référence ce modèle (Project)
+        'account_move_id',         # column2: Nom de la colonne dans la table de jonction qui référence le modèle cible (Employee)
+        string='Factures de Provision', # string: Le libellé affiché dans l'interface utilisateur,
+        readonly=True,
+        compute='_compute_provision_invoices'
+    )
 
 
 
@@ -38,7 +48,7 @@ class SaleOrder(models.Model):
 
         return super(SaleOrder, self).create(vals_list)
 
-    @api.constrains('sale_order_template_id')
+
     def _compute_is_provision(self):
         for record in self:
             if record.sale_order_template_id.is_provision:
@@ -46,10 +56,35 @@ class SaleOrder(models.Model):
             else:
                 record.is_provision = False
 
-    @api.constrains('sale_order_template_id')
+
     def _compute_is_prestation(self):
         for record in self:
             if record.sale_order_template_id.is_prestation:
                 record.is_prestation = True
             else:
                 record.is_prestation = False
+
+    @api.depends('is_prestation', 'invoice_ids', 'invoice_ids.state')
+    def _compute_provision_invoices(self):
+        for order in self:
+            if order.is_prestation:
+                provision_orders = self.env['sale.order'].search([
+                    ('so_prestation', '=', order.id),
+                    ('is_provision', '=', True)
+                ])
+
+                # Récupérer toutes les factures
+                invoices = provision_orders.mapped('invoice_ids')
+
+                # Optionnel : filtrer par statut
+                # invoices = invoices.filtered(lambda inv: inv.state in ['posted', 'draft'])
+
+                order.provision_invoices = invoices
+            else:
+                order.provision_invoices = False
+
+    @api.constrains('so_prestation')
+    def _check_is_prestation(self):
+        for record in self:
+            if record.is_prestation and record.is_provision:
+                raise ValidationError("_ERROR: You have to chose between Prestation or Provision (or none).")

@@ -5,8 +5,8 @@ from odoo.exceptions import ValidationError
 class SaleOrderTemplate(models.Model):
     _inherit = "sale.order.template"
 
-    is_prestation = fields.Boolean(string="Est une prestation",default= False)
-    is_provision = fields.Boolean(string="Est une provision", default=False)
+    is_prestation = fields.Boolean(string="Est une prestation",default= False, store=True)
+    is_provision = fields.Boolean(string="Est une provision", default=False, store=True)
     sequence_id = fields.Many2one(
         'ir.sequence',
         string='Séquence personnalisée',
@@ -22,3 +22,5 @@ class SaleOrderTemplate(models.Model):
             if record.is_prestation and record.is_provision:
                 raise ValidationError("_ERROR: You have to chose between Prestation or Provision (or none).")
         # all records passed the test, don't return anything
+
+
