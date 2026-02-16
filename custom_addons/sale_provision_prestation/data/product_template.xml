@@ -1,0 +1,15 @@
+<odoo noupdate="1">
+<record id="__sale_provision_prestation__.provisions" model="product.template" context="{'create_product_product': False}" forcecreate="1">
+<field name="name">Provisions comptabilité</field>
+<field name="type">service</field>
+<field name="purchase_ok" eval="False"/>
+<field name="purchase_method">purchase</field>
+<field name="service_type">manual</field>
+<field name="invoice_policy">order</field>
+<field name="recurring_invoice" eval="True"/>
+<field name="allow_prorated_price" eval="True"/>
+<field name="website_sequence">10035</field>
+<field name="publish_date">2026-01-31 18:46:07</field>
+<field name="service_policy">ordered_prepaid</field>
+</record>
+</odoo>
