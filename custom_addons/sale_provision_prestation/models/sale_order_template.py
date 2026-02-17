@@ -20,7 +20,7 @@ class SaleOrderTemplate(models.Model):
     def _check_is_prestation(self):
         for record in self:
             if record.is_prestation and record.is_provision:
-                raise ValidationError("_ERROR: You have to chose between Prestation or Provision (or none).")
+                raise ValidationError("_ERROR: You have to chose between Prestation and Provision (or none).")
         # all records passed the test, don't return anything
 
 

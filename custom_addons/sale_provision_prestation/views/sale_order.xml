@@ -6,6 +6,7 @@
         <field name="arch" type="xml">
         <!--  Ajouter le champ après le champ 'name'  -->
         <xpath expr="/form//field[@name='sale_order_template_id']" position="after">
+            <field name="invoiced_provision_amount"/>
             <field name="is_provision"/>
             <field name="is_prestation"/>
             <field name="so_prestation"
